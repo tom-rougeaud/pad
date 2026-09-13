@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>MathNotes — Guide de l'application</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+@page { size: A4; margin: 18mm 16mm; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--accent:#2F80ED;--green:#27AE60;--orange:#D97706;--purple:#7C3AED;--indigo:#6366F1;--red:#DC2626;}
+body{font-family:'DM Sans',sans-serif;font-size:12px;line-height:1.75;color:#1A1A2E;background:#fff;}
+.page{max-width:174mm;margin:0 auto;padding:8mm 0;}
+/* COVER */
+.cover{min-height:90mm;background:linear-gradient(135deg,#2F80ED 0%,#7C3AED 100%);border-radius:12px;padding:36px 40px;color:#fff;margin-bottom:32px;position:relative;overflow:hidden;}
+.cover::before{content:'Σ';position:absolute;right:30px;top:10px;font-size:140px;font-family:Georgia,serif;font-weight:bold;opacity:.12;}
+.cover-eyebrow{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;opacity:.8;margin-bottom:12px;}
+.cover-title{font-size:34px;font-weight:700;line-height:1.15;margin-bottom:10px;}
+.cover-sub{font-size:14px;opacity:.9;font-weight:400;}
+.cover-meta{margin-top:24px;font-size:11px;opacity:.75;}
+/* Typography */
+h1{font-size:19px;font-weight:700;color:var(--accent);margin:28px 0 10px;padding-bottom:5px;border-bottom:2px solid #E5E7EB;}
+h2{font-size:14px;font-weight:700;margin:18px 0 6px;color:#1A1A2E;}
+h3{font-size:12px;font-weight:600;margin:12px 0 4px;color:#374151;}
+p{margin:4px 0;color:#374151;}
+/* Feature cards grid */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0;}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:12px 0;}
+.card{background:#F8FAFF;border:1px solid #E5E7EB;border-radius:10px;padding:13px 14px;}
+.card-icon{font-size:20px;margin-bottom:6px;}
+.card-title{font-size:12px;font-weight:700;color:#1A1A2E;margin-bottom:4px;}
+.card-text{font-size:10.5px;color:#6B7280;line-height:1.6;}
+/* Callout boxes */
+.box{border-radius:9px;padding:12px 14px;margin:10px 0;}
+.box-tip{background:rgba(47,128,237,.07);border-left:4px solid var(--accent);}
+.box-note{background:rgba(39,174,96,.07);border-left:4px solid var(--green);}
+.box-warn{background:rgba(217,119,6,.07);border-left:4px solid var(--orange);}
+.box-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;}
+.box-tip .box-title{color:var(--accent);}
+.box-note .box-title{color:var(--green);}
+.box-warn .box-title{color:var(--orange);}
+/* Kbd shortcuts */
+.shortcut-table{width:100%;border-collapse:collapse;margin:10px 0;}
+.shortcut-table th{background:#F3F4F6;text-align:left;padding:6px 10px;font-size:10.5px;font-weight:700;color:#374151;border:1px solid #E5E7EB;}
+.shortcut-table td{padding:5px 10px;font-size:10.5px;border:1px solid #E5E7EB;vertical-align:top;}
+.shortcut-table tr:nth-child(even) td{background:#FAFAFA;}
+kbd{display:inline-block;background:#F3F4F6;border:1px solid #D1D5DB;border-radius:4px;padding:1px 6px;font-family:'DM Mono',monospace;font-size:10px;color:#374151;box-shadow:0 1px 0 #9CA3AF;}
+code{font-family:'DM Mono',monospace;background:#E8F0FE;color:#2F80ED;padding:1px 5px;border-radius:4px;font-size:10px;}
+.tag{display:inline-block;background:var(--accent);color:#fff;font-size:9.5px;font-weight:600;padding:2px 7px;border-radius:99px;text-transform:uppercase;letter-spacing:.04em;margin-right:4px;}
+.tag.green{background:var(--green);}
+.tag.orange{background:var(--orange);}
+.tag.purple{background:var(--purple);}
+/* Section divider */
+.section-divider{display:flex;align-items:center;gap:10px;margin:22px 0 12px;}
+.section-divider span{background:var(--accent);color:#fff;border-radius:99px;width:26px;height:26px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;}
+.section-divider h1{border:none;margin:0;padding:0;}
+/* Footer */
+footer{margin-top:32px;padding-top:10px;border-top:1px solid #E5E7EB;display:flex;justify-content:space-between;align-items:center;font-size:10px;color:#9CA3AF;}
+@media print{
+  body{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .cover{background:linear-gradient(135deg,#2F80ED 0%,#7C3AED 100%) !important;}
+  .page-break{page-break-before:always;}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-eyebrow">Guide de l'application</div>
+  <div class="cover-title">MathNotes<br>Éditeur de cours</div>
+  <div class="cover-sub">Lycée Professionnel · CAP · Bac Pro · Prépa-Métiers</div>
+  <div class="cover-meta">Version 3 · Application HTML5 — fonctionne hors-ligne · <span style="font-family:'DM Mono',monospace;">mathnotes.html</span></div>
+</div>
+
+<!-- INTRO -->
+<div class="box box-tip">
+  <div class="box-title">📖 À propos</div>
+  MathNotes est un éditeur de cours de mathématiques en un seul fichier HTML, utilisable sans connexion internet. Ouvrez-le dans Chrome ou Firefox, rédigez votre cours, exportez-le en page web ou imprimez-le en PDF en un clic.
+</div>
+
+<!-- 1. INTERFACE -->
+<div class="section-divider"><span>🖥</span><h1>L'interface</h1></div>
+<div class="grid3">
+  <div class="card"><div class="card-icon">Σ</div><div class="card-title">Logo & Favicon</div><div class="card-text">Le symbole Σ est reconnaissable dans tous les onglets. Le titre du document est modifiable directement dans la barre du haut.</div></div>
+  <div class="card"><div class="card-icon">📌</div><div class="card-title">Ruban Word-like</div><div class="card-text">Barre d'outils en haut avec icônes <strong>nommées</strong> et groupées : Format, Couleurs, Blocs, Insertion, Formules, Historique.</div></div>
+  <div class="card"><div class="card-icon">🔢</div><div class="card-title">Barre de variables</div><div class="card-text">Juste sous le ruban : boutons de saisie rapide pour <strong>x, y, z, a, b, c, n, t, k</strong>, lettres grecques et opérateurs fréquents.</div></div>
+  <div class="card"><div class="card-icon">📄</div><div class="card-title">Format A4</div><div class="card-text">L'éditeur respecte la largeur A4 (210 mm) et s'agrandit automatiquement avec le contenu. La mise en page s'imprime fidèlement.</div></div>
+  <div class="card"><div class="card-icon">🔍</div><div class="card-title">Rechercher (Ctrl+F)</div><div class="card-text">Barre de recherche avec surlignage de toutes les occurrences et navigation ↑↓ dans le document.</div></div>
+  <div class="card"><div class="card-icon">⚙️</div><div class="card-title">Réglages</div><div class="card-text">Auteur, niveau, taille de police, thème (clair / sombre / sépia). Paramètres sauvegardés automatiquement.</div></div>
+</div>
+
+<!-- 2. FORMULES -->
+<div class="section-divider"><span>∫</span><h1>Saisir des formules</h1></div>
+<p>MathNotes minimise la saisie manuelle de LaTeX. Trois méthodes complémentaires :</p>
+<div class="grid3">
+  <div class="card">
+    <div class="card-title"><code>/commande</code> — Slash</div>
+    <div class="card-text">Tapez <code>/</code> dans le texte pour afficher la liste filtrée des formules. Ex. : <code>/discriminant</code>, <code>/pythagore</code>, <code>/fonction-affine</code>. Flèches ↑↓ + Entrée pour insérer. Toujours en mode <strong>inline</strong> par défaut.</div>
+  </div>
+  <div class="card">
+    <div class="card-title"><code>//symbole</code> — Double-slash</div>
+    <div class="card-text">Tapez <code>//</code> pour insérer un symbole rapidement. Ex. : <code>//alpha</code> → α, <code>//x_bar</code> → x̄, <code>//AB_vec</code> → →AB. La syntaxe <code>//lettre_mod</code> est dynamique (mod = bar, hat, vec, dot, prime…).</div>
+  </div>
+  <div class="card">
+    <div class="card-title">⚡ <kbd>Ctrl</kbd>+<kbd>/</kbd> — Saisie rapide</div>
+    <div class="card-text">Appuyez sur <kbd>Ctrl</kbd>+<kbd>/</kbd> (ou le bouton ⚡ du ruban) : une petite fenêtre flottante s'ouvre au curseur, <strong>y compris à l'intérieur d'un encadré</strong>. Tapez le LaTeX, appuyez sur <kbd>Entrée</kbd> → la formule est insérée et le curseur revient au texte.</div>
+  </div>
+</div>
+
+<div class="grid2" style="margin-top:10px;">
+  <div class="card">
+    <div class="card-title">∫ Formule inline</div>
+    <div class="card-text">S'insère dans le fil du texte, sans saut de ligne. Bouton ∫ du ruban ou toute commande <code>/</code>. Double-cliquer pour modifier.</div>
+  </div>
+  <div class="card">
+    <div class="card-title">▦ Formule en bloc</div>
+    <div class="card-text">Bloc centré à gauche avec <strong>titre</strong> affiché en haut (ex. « Discriminant »). Bouton ▦ du ruban. Choisir un <strong>Modèle</strong> dans le panneau droit pour préremplir.</div>
+  </div>
+</div>
+
+<div class="box box-note">
+  <div class="box-title">💡 Barre de variables</div>
+  Cliquez sur <strong>x, y, a, b, c</strong>… dans la barre en dessous du ruban : ces caractères sont <strong>toujours insérés en formule LaTeX inline</strong>, jamais en texte brut. Dans la fenêtre de formule, les boutons d'insertion rapide (x, y, a/b, √, ≤, ≥, ±, π…) permettent de compléter sans taper de LaTeX.
+</div>
+
+<!-- 3. BLOCS COLORÉS -->
+<div class="section-divider"><span>🎨</span><h1>Blocs colorés & Exercices</h1></div>
+<div class="grid2">
+  <div>
+    <h2>Encadrés disponibles</h2>
+    <table class="shortcut-table">
+      <tr><th>Bouton</th><th>Usage</th></tr>
+      <tr><td>📘 Définition</td><td>Définir un concept clé</td></tr>
+      <tr><td>📐 Théorème</td><td>Énoncer un théorème ou propriété</td></tr>
+      <tr><td>⚠️ Attention</td><td>Mise en garde ou erreur fréquente</td></tr>
+      <tr><td>🛠️ Méthode</td><td>Décrire une procédure étape par étape</td></tr>
+      <tr><td>📝 Exercice</td><td>Bloc exercice avec correction (voir ci-dessous)</td></tr>
+    </table>
+    <div class="box box-warn" style="margin-top:8px;">
+      <div class="box-title">⚠ Règles</div>
+      Il est <strong>impossible d'imbriquer</strong> des zones colorées et <kbd>Tab</kbd> y est désactivée. <strong>1× <kbd>Entrée</kbd></strong> = nouvelle ligne dans le cadre ; <strong>2× <kbd>Entrée</kbd></strong> = sortir du cadre. Un rappel discret s'affiche sous le cadre pendant la saisie. Pour supprimer un encadré, placez le curseur juste après et appuyez sur <kbd>Backspace</kbd>.
+    </div>
+  </div>
+  <div>
+    <h2>📝 Mode Exercice</h2>
+    <p>Le bouton <strong>Exercice</strong> du ruban insère un bloc dédié :</p>
+    <ol style="margin:8px 0;padding-left:18px;font-size:10.5px;color:#374151;line-height:1.8;">
+      <li>Saisissez l'énoncé dans la zone bleue.</li>
+      <li>Cliquez <strong>✓ Valider</strong> : l'énoncé se verrouille en lecture seule.</li>
+      <li>Une section <em>Correction dépliable</em> apparaît — saisissez-y la correction.</li>
+      <li>Cliquez <strong>✎ Modifier</strong> pour rouvrir l'énoncé si besoin.</li>
+    </ol>
+    <p style="margin-top:8px;font-size:10.5px;color:#6B7280;">À l'impression, les boutons sont masqués et la correction s'affiche entièrement.</p>
+  </div>
+</div>
+
+<!-- 4. SYMBOLES & MODÈLES -->
+<div class="section-divider"><span>🔤</span><h1>Panneau droit — Symboles, Modèles, Excel</h1></div>
+<p>Le panneau s'ouvre par l'onglet bleu <strong>PANNEAU</strong> collé au bord droit de l'écran (toujours visible), ou par les boutons <strong>Σ Symboles</strong>, <strong>📋 Modèles</strong>, <strong>🧮 Calculatrice</strong> et <strong>📊 Fonctions</strong> du ruban. Il contient trois onglets :</p>
+<div class="grid3">
+  <div class="card">
+    <div class="card-title">🔤 Symboles</div>
+    <div class="card-text">6 sous-onglets : Grec, Symboles, Structures, Fonctions, Géomét., Stats. Survolez un symbole pour voir sa commande <code>//</code> correspondante. Cliquez pour insérer en inline.</div>
+  </div>
+  <div class="card">
+    <div class="card-title">📋 Modèles</div>
+    <div class="card-text"><strong>48 modèles sur 10 chapitres</strong> : Calcul numérique, Proportionnalité &amp; %, Fonctions, Équations, Suites, Géométrie plane, Géométrie 3D, Statistiques, Probabilités, Analyse. Deux boutons : <strong>▦ En bloc</strong> (avec titre) ou <strong>∫ En ligne</strong>.</div>
+  </div>
+  <div class="card">
+    <div class="card-title">📊 Excel</div>
+    <div class="card-text">35 fonctions Excel disponibles (SUM, IF, ROUND, MEDIAN…). Cliquez dans une cellule du tableur, puis sur la fonction pour l'insérer automatiquement.</div>
+  </div>
+</div>
+<div class="box box-tip" style="margin-top:8px;">
+  <div class="box-title">🧮 Calculatrice (coin supérieur droit)</div>
+  En haut du panneau droit, une calculatrice complète interprète les expressions : <code>sqrt(16)+3^2</code>, <code>sin(pi/6)</code>, <code>2^10</code>. Elle supporte les fonctions sqrt, sin, cos, tan, ln, log, exp, abs, pi, e. Collez une expression et appuyez sur <kbd>=</kbd> ou <kbd>Entrée</kbd>.
+</div>
+
+<!-- 5. IMAGES -->
+<div class="section-divider"><span>🖼</span><h1>Images & Médias</h1></div>
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">Insérer une image</div>
+    <div class="card-text">Bouton <strong>Image</strong> du ruban. Deux modes : URL ou fichier local (base64). Ajoutez une légende optionnelle.</div>
+  </div>
+  <div class="card">
+    <div class="card-title">Déplacer & Redimensionner</div>
+    <div class="card-text"><strong>Double-cliquez</strong> sur l'image pour la sélectionner. Le panneau fixe (en haut à droite) affiche un slider de largeur et des flèches ↑↓←→. <strong>Glissez</strong> l'image à la souris pour la repositionner librement.</div>
+  </div>
+</div>
+
+<!-- 6. TABLEUR -->
+<div class="section-divider"><span>📊</span><h1>Tableur intégré</h1></div>
+<p>Bouton <strong>📊 Tableur</strong> du ruban → choisissez lignes × colonnes. Cliquez ensuite dans une cellule : un <strong>panneau contextuel</strong> s'ouvre à côté du tableur (il n'apparaît ni à l'impression ni à l'export).</p>
+<div class="grid2" style="margin-top:8px;">
+  <div class="card">
+    <div class="card-title">ƒx Onglet Fonctions</div>
+    <div class="card-text">Toutes les fonctions en <strong>français</strong>, classées par thème : SOMME, MOYENNE, SI, NB.SI, SOMME.SI, ARRONDI, RACINE, PUISSANCE, MEDIANE, ECARTYPE, CONCATENER… Un champ de recherche filtre la liste. Un clic insère la fonction dans la cellule active.</div>
+  </div>
+  <div class="card">
+    <div class="card-title">🎨 Onglet Format</div>
+    <div class="card-text">Gras, italique, alignement gauche/centre/droite, couleur de fond, couleur du texte, et <strong>format des nombres</strong> : Standard, Entier, 0,00, Pourcentage, Monnaie €. Boutons de largeur de colonne également.</div>
+  </div>
+</div>
+<div class="grid3" style="margin-top:8px;">
+  <div class="card"><div class="card-title">Séparateur français</div><div class="card-text">Utilisez le <strong>point-virgule</strong> comme dans Excel FR : <code>=SI(A1&gt;10;"Oui";"Non")</code>. La virgule fonctionne aussi.</div></div>
+  <div class="card"><div class="card-title">Plages & références</div><div class="card-text"><code>=SOMME(A1:A6)</code>, <code>=A1*B2</code>. Les <strong>références absolues</strong> <code>$A$1</code> sont gérées.</div></div>
+  <div class="card"><div class="card-title">Noms anglais acceptés</div><div class="card-text"><code>=SUM(A1:A4)</code> fonctionne aussi bien que <code>=SOMME(A1:A4)</code>.</div></div>
+</div>
+<div class="box box-tip" style="margin-top:10px;">
+  <div class="box-title">↘ Recopie incrémentée (poignée de recopie)</div>
+  Comme dans Excel : sélectionnez une cellule, saisissez le petit <strong>carré bleu</strong> en bas à droite et faites-le glisser vers le bas ou vers la droite. La formule est recopiée en <strong>ajustant automatiquement les références</strong> — <code>=B2*C2</code> devient <code>=B3*C3</code>, <code>=B4*C4</code>, etc. La mise en forme de la cellule source suit également. Figez une référence avec <code>$</code> pour qu'elle ne bouge pas.
+</div>
+<div class="box box-note" style="margin-top:8px;">
+  <div class="box-title">↔ Largeur des colonnes</div>
+  <strong>Tableur</strong> : glissez le trait bleu qui apparaît sur le bord droit d'un en-tête de colonne (A, B, C…), ou utilisez les boutons <em>Colonne</em> du panneau.<br>
+  <strong>Tableau classique</strong> : approchez le curseur du bord droit d'une cellule — il devient une double flèche — puis glissez. Les largeurs sont conservées à l'export et à l'impression.
+</div>
+
+<!-- 7. EXPORT -->
+<div class="section-divider"><span>📤</span><h1>Export & Impression</h1></div>
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">📤 Export Page Web</div>
+    <div class="card-text">Génère un fichier <code>.html</code> autonome. Les <strong>tableaux et tableurs sont reproduits à l'identique</strong> : valeurs calculées, largeurs de colonnes, bordures, couleurs de fond et formats de nombres. Les formules rendues et les couleurs d'encadrés sont préservées, avec l'en-tête auteur/niveau/date. Le fichier s'ouvre dans n'importe quel navigateur sans MathNotes.</div>
+  </div>
+  <div class="card">
+    <div class="card-title">🖨 Imprimer / PDF</div>
+    <div class="card-text">Utilisez <kbd>Ctrl+P</kbd> ou le bouton du haut. Les couleurs des blocs et les formules sont <strong>préservées</strong> dans le PDF grâce à la directive <code>print-color-adjust: exact</code>. Les boutons (Valider, etc.) sont masqués à l'impression.</div>
+  </div>
+</div>
+
+<!-- 8. RACCOURCIS -->
+<div class="section-divider"><span>⌨</span><h1>Raccourcis clavier</h1></div>
+<div class="grid2">
+  <div>
+    <table class="shortcut-table">
+      <tr><th>Raccourci</th><th>Action</th></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>B</kbd></td><td>Gras</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>I</kbd></td><td>Italique</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>U</kbd></td><td>Souligné</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>K</kbd></td><td>Insérer un lien</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>S</kbd></td><td>Sauvegarder</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>Z</kbd></td><td>Annuler</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>Y</kbd></td><td>Rétablir</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>A</kbd></td><td>Tout sélectionner</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>F</kbd></td><td>Rechercher</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>P</kbd></td><td>Imprimer / PDF</td></tr>
+      <tr style="background:#EFF6FF !important;"><td><kbd>Ctrl</kbd>+<kbd>/</kbd></td><td><strong>Saisie rapide inline</strong></td></tr>
+      <tr><td><kbd>Backspace</kbd></td><td>Supprimer un encadré (curseur juste après)</td></tr>
+    </table>
+  </div>
+  <div>
+    <table class="shortcut-table">
+      <tr><th>Raccourci</th><th>Action</th></tr>
+      <tr><td><code>/mot-clé</code></td><td>Liste de formules filtrées</td></tr>
+      <tr><td><code>//cmd</code></td><td>Symbole LaTeX rapide</td></tr>
+      <tr><td><code>//x_bar</code></td><td>x̄ (<code>\bar{x}</code>)</td></tr>
+      <tr><td><code>//AB_vec</code></td><td>→AB (<code>\overrightarrow{AB}</code>)</td></tr>
+      <tr><td><code>//f_prime</code></td><td>f'</td></tr>
+      <tr><td>⚡ Ruban</td><td>Ouvre /inline au curseur</td></tr>
+      <tr><td><kbd>Entrée ×2</kbd></td><td>Sortir d'un bloc coloré</td></tr>
+      <tr><td><kbd>Dbl-clic</kbd> formule</td><td>Modifier la formule</td></tr>
+      <tr><td><kbd>Dbl-clic</kbd> image</td><td>Sélectionner pour redimensionner</td></tr>
+      <tr><td><kbd>Echap</kbd></td><td>Fermer fenêtres/popups</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="box box-warn" style="margin-top:14px;">
+  <div class="box-title">⚠ Compatibilité</div>
+  MathNotes fonctionne optimalement dans <strong>Google Chrome</strong> ou <strong>Microsoft Edge</strong> (Chromium). Firefox est supporté. La sauvegarde automatique utilise le <code>localStorage</code> du navigateur — vos cours restent sur votre appareil.
+</div>
+
+<footer>
+  <span>MathNotes v3 — Éditeur de cours de mathématiques pour lycée professionnel</span>
+  <span>Guide généré le <span id="date-gen"></span></span>
+</footer>
+
+</div>
+<script>document.getElementById('date-gen').textContent=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});</script>
+</body>
+</html>
