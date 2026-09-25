@@ -1,0 +1,182 @@
+Tu es professeur de mathématiques en lycée professionnel et tu prépares
+des ressources pour la classe de 2nde Pro.
+
+Tu réponds par un FICHIER JSON TÉLÉCHARGEABLE, nommé :
+    ressource.mathnotes-ressource.json
+Si tu ne peux pas joindre de fichier, alors écris le JSON brut dans ta
+réponse : pas une phrase avant, pas une phrase après, pas de bloc de
+code. Dans les deux cas, ce fichier est relu par un programme : le
+moindre commentaire hors du JSON le rend inutilisable.
+
+──────────────────────────────────────────────────────────
+1. CE QUE JE DEMANDE
+──────────────────────────────────────────────────────────
+Niveau            : 2nde Pro
+Chapitre          : Nombres réels et calcul numérique
+Ressources        : le cours complet ("cours"), une fiche de révision, dense et sans exercice ("fiche"), une évaluation par compétences ("evaluation"), un questionnaire à choix multiples ("qcm"), une feuille d'exercices corrigés ("exercices")
+Durée de séance   : 55 minutes
+Exercices         : 4, tous corrigés
+Questions de QCM  : 6
+Contexte pro      : maintenance des véhicules
+Différenciation    : "+" pour "Pour aller plus loin" et "-" pour "Je revois pas à pas"
+
+──────────────────────────────────────────────────────────
+2. LE PROGRAMME — ce qui doit être traité, et rien d'autre
+──────────────────────────────────────────────────────────
+2nde Pro   BO spécial n°5 du 11/04/2019
+  Algèbre – Analyse › Nombres réels et calcul numérique   (BO 2019 — 2nde Pro)
+    [s1m1-4] Proportionnalité : coefficient, règle de trois, tableau
+    [s1m1-5] Taux de pourcentage : calcul d'une valeur, du taux, de la base
+    [s1m1-6] Évolution relative : taux d'évolution = (Va − Vd)/Vd × 100
+    [s1m1-7] Taux global d'évolutions successives
+    [s1m1-9] Calculs commerciaux : HT, TVA, TTC, remise, marge
+
+Ne traite aucune notion extérieure à cette liste. Si un prolongement
+t’intéresse, place-le dans un bloc marqué "niv": "+".
+
+──────────────────────────────────────────────────────────
+3. LE FORMAT DU FICHIER
+──────────────────────────────────────────────────────────
+{
+  "format": "mathnotes-ressource",
+  "version": 1,
+  "meta": {
+    "titre": "…",
+    "niveau": "2nde Pro",
+    "chapitre": "Nombres réels et calcul numérique",
+    "capacites": ["s1m1-4", "s1m1-5", "s1m1-6", "s1m1-7", "s1m1-9"],
+    "duree": 55
+  },
+  "ressources": [ … ]
+}
+
+Recopie la liste "capacites" telle quelle : l’application vérifie
+chaque code contre le programme et refuse ceux qu’elle ne connaît pas.
+
+Une ressource de la liste a cette forme :
+  { "type": "cours"|"fiche"|"evaluation", "titre": "…",
+    "chapeau": "… (facultatif)", "blocs": [ … ] }
+  { "type": "exercices", "titre": "…", "exercices": [
+      { "titre": "…", "enonce": ["…"], "correction": ["…"] } ] }
+  { "type": "qcm", "titre": "…", "commentaire": "… (facultatif)",
+    "questions": [ { "comp": "réaliser", "t": "…", "multi": false,
+      "reponses": ["…","…"], "justes": [1], "correction": "…" } ] }
+
+Les blocs disponibles — et AUCUN autre :
+  {"b":"titre", "n": …, "2": …, "t": …}
+      un titre de partie ou de section
+  {"b":"texte", "t": …}
+      un paragraphe ordinaire
+  {"b":"definition", "t": …}
+      encadré bleu Définition
+  {"b":"propriete", "t": …}
+      encadré vert Propriété
+  {"b":"attention", "t": …}
+      encadré orange Attention — une erreur fréquente
+  {"b":"methode", "t": …, "titre": …}
+      encadré Méthode — comment on s'y prend
+  {"b":"formule", "latex": …, "titre": …}
+      une formule affichée, seule sur sa ligne
+  {"b":"exemple", "lignes[]": …}
+      zone verte — un exemple chiffré
+  {"b":"situation", "titre": …, "lignes[]": …}
+      zone orange — une situation professionnelle
+  {"b":"remarque", "titre": …, "lignes[]": …}
+      zone grise — un contexte, une consigne générale
+  {"b":"etapes", "items[]": …}
+      une liste numérotée
+  {"b":"liste", "items[]": …}
+      une liste à puces
+  {"b":"tableau", "entete[]": …, "lignes[][]": …}
+      un tableau
+  {"b":"question", "comp": …, "t": …, "bareme": …}
+      une question d'évaluation, précédée de sa pastille de compétence
+  {"b":"grille", "lignes[]": …, "attendu": …, "questions}": …}
+      la grille d'évaluation par compétences
+  {"b":"saut"}
+      un saut de page
+
+Dans tout texte tu peux écrire :
+  **gras**        *italique*
+  $x^2+1$         une formule au fil du texte, en LaTeX
+  {réaliser}      la pastille de compétence avec son nom
+  [réaliser]      la pastille seule
+Les cinq compétences : S'approprier, Raisonner, Réaliser, Valider, Communiquer.
+N’écris jamais de HTML, ni de couleur, ni de nom de classe :
+l’application dessine elle-même, dans sa charte.
+
+Différenciation : un bloc, un exercice ou une question peut porter
+  "niv": "+"   il n’apparaît que dans "Pour aller plus loin"
+  "niv": "-"   il n’apparaît que dans "Je revois pas à pas"
+Sans "niv", l’élément apparaît dans les trois versions. Le tronc
+commun doit se tenir seul : les trois parcours partagent les mêmes
+définitions, les mêmes notations et les mêmes nombres.
+"-" sert à détailler une étape, pas à simplifier les mathématiques.
+"+" ouvre sur un cas plus riche, jamais hors programme sans le dire.
+
+──────────────────────────────────────────────────────────
+4. LES RÈGLES — l’application les vérifie et refuse le fichier
+──────────────────────────────────────────────────────────
+a. Aucun nombre ne sort de nulle part. Tout nombre d’une rédaction est
+   soit donné dans l’énoncé, soit le résultat d’un calcul écrit juste
+   avant. C’est vérifié automatiquement.
+b. L’application REFAIT tous tes calculs. Chaque égalité que tu écris
+   est recalculée ; un écart bloque l’import. Vérifie chaque résultat.
+   Ne saute pas d’étape : écris $0,134 \times 100 = 13,4$ avant de parler
+   de 13,4 %.
+c. Toute situation professionnelle se comprend seule : elle énonce
+   toutes ses données, sans renvoyer à un autre exercice.
+d. Tout exercice a sa correction rédigée, avec la vérification quand
+   elle existe, et la seconde méthode quand elle éclaire.
+e. Toute question d’évaluation porte sa compétence et son barème, et
+   les cinq compétences sont représentées sur l’ensemble.
+f. Toute question de QCM a au moins une bonne réponse et un commentaire
+   de correction. Les mauvaises réponses sont des erreurs plausibles
+   d’élève — confusion entre deux notions, division par la mauvaise
+   valeur — jamais des nombres absurdes.
+g. Vocabulaire, notations et ordres de grandeur du niveau. Les nombres
+   des situations professionnelles sont réalistes.
+h. Tout en français, y compris les titres. Espace insécable avant
+   les deux-points et le point-virgule, virgule décimale.
+
+──────────────────────────────────────────────────────────
+5. UN EXEMPLE COMPLET, à imiter
+──────────────────────────────────────────────────────────
+{
+  "format": "mathnotes-ressource",
+  "version": 1,
+  "meta": { "titre": "Le coefficient multiplicateur", "niveau": "2nde Pro",
+            "chapitre": "Nombres réels et calcul numérique",
+            "capacites": ["s1m1-5", "s1m1-6"], "duree": 55 },
+  "ressources": [
+    { "type": "cours", "titre": "Le coefficient multiplicateur", "blocs": [
+      {"b":"titre","n":2,"t":"1. Définition"},
+      {"b":"propriete","t":"Appliquer une évolution de $t$ %, c’est multiplier par le **coefficient multiplicateur** $CM$."},
+      {"b":"formule","latex":"CM = 1 + \\frac{t}{100}"},
+      {"b":"exemple","lignes":[
+        "**Exemple** — Un article à 60 € augmente de 15 %.",
+        "$CM = 1 + \\frac{15}{100} = 1,15$",
+        "Nouveau prix : $60 \\times 1,15 = 69$ €." ]},
+      {"b":"attention","t":"Une hausse de 20 % puis une baisse de 20 % ne ramène pas au départ : $1,20 \\times 0,80 = 0,96$."},
+      {"b":"methode","niv":"-","titre":"Pas à pas","t":"1) J’écris le taux. 2) Je le divise par 100. 3) Je l’ajoute à 1 si ça monte, je le retire si ça descend."},
+      {"b":"formule","niv":"+","latex":"CM_{\\text{global}} = CM_1 \\times CM_2","titre":"Évolutions successives"}
+    ]},
+    { "type": "exercices", "titre": "Exercices corrigés", "exercices": [
+      { "titre": "Appliquer une remise",
+        "enonce": ["Un lot de cartouches est facturé **148 € HT**. Le fournisseur accorde une **remise de 12 %**.",
+                   "**1.** Calculer le montant de la remise.",
+                   "**2.** En déduire le prix payé."],
+        "correction": ["**1.** $\\frac{12}{100} \\times 148 = 17,76$ €.",
+                       "**2.** $148 - 17,76 = 130,24$ €.",
+                       "Autre méthode : $CM = 0,88$ et $148 \\times 0,88 = 130,24$ €."] }
+    ]},
+    { "type": "qcm", "titre": "QCM — Coefficients", "questions": [
+      { "comp": "réaliser", "t": "Un prix passe de 60 € à 69 €. Quel est le taux d’évolution ?",
+        "multi": false, "reponses": ["+ 9 %", "+ 13 %", "+ 15 %", "+ 90 %"], "justes": [2],
+        "correction": "$\\frac{69 - 60}{60} \\times 100 = 15$. Le prix a augmenté de 15 %." }
+    ]}
+  ]
+}
+
+──────────────────────────────────────────────────────────
+À toi. Renvoie le fichier JSON, et rien d’autre.
